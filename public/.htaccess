@@ -1,0 +1,37 @@
+# =======================================================
+# Configuración Apache para XAMPP (htdocs) - InvBulto POS
+# =======================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Si el archivo o directorio solicitado existe físicamente, servirlo directamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Cualquier otra petición se redirige a index.html para soporte de SPA
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Asegurar tipos MIME para JavaScript moderno ES Modules
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType application/json .json
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# Opciones de seguridad y prevención de listado de directorios
+Options -Indexes
+
+# Compresión GZIP para máximo rendimiento en XAMPP
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Deshabilitar caché estricto durante pruebas en desarrollo local
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>

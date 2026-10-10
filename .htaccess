@@ -1,0 +1,34 @@
+# =======================================================
+# Configuración Apache para XAMPP (htdocs) - InvBulto POS
+# =======================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Si existe la carpeta dist compilada y se solicita la raíz, servir dist/index.html
+  RewriteCond %{REQUEST_URI} !^/dist/
+  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
+  RewriteRule ^$ dist/index.html [L]
+
+  # Si el archivo o directorio solicitado existe físicamente, servirlo directamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Si no existe y está dist, redirigir a dist/index.html
+  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
+  RewriteRule ^ dist/index.html [L]
+
+  # Fallback a index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Tipos MIME para módulos JS en XAMPP
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType application/json .json
+  AddType image/svg+xml .svg
+</IfModule>
+
+Options -Indexes

@@ -1,0 +1,6 @@
+{
+  "name": "InvBulto POS & ERP",
+  "description": "Sistema integral de control de inventario por unidad y bulto, punto de venta dual divisa/local con facturas PDF, reportes, gastos/beneficios, usuarios y arquitectura Laravel MySQL.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
